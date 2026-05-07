@@ -1,0 +1,14 @@
+// Address : Instruction    // Assembly
+// ------------------------------------------------
+00300093                    // 00: addi x1, x0, 3   (Initialize x1 = 3)
+00000013                    // 04: nop
+00000013                    // 08: nop
+00000013                    // 0C: nop              (Wait for x1 to write back)
+FFF08093                    // 10: addi x1, x1, -1  (Decrement x1) <-- LOOP TARGET
+00000013                    // 14: nop
+00000013                    // 18: nop
+00000013                    // 1C: nop              (Wait for decrement to write back)
+FE0098E3                    // 20: bne x1, x0, -16  (If x1 != 0, jump back 16 bytes to 10)
+00000013                    // 24: nop              (Ghost instruction 1 in IF stage)
+00000013                    // 28: nop              (Ghost instruction 2 in ID stage)
+00000013                    // 2C: nop              (Padding for final exit)
